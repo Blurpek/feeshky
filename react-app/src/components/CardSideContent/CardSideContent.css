@@ -1,0 +1,16 @@
+.flex-container {
+  height: 100%;
+  padding: 7px;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.row {
+  text-align: center;
+  /* width: auto; */
+}
