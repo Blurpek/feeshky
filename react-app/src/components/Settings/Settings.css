@@ -1,0 +1,42 @@
+select {
+  appearance: none;
+  -moz-appearance: none;
+  font-style: italic;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin: 2px 15px;
+  padding-right: 25px;
+  border: 0;
+  color: inherit;
+  background-color: transparent;
+  background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat; 
+  opacity: 0.5;
+
+  transition: ease-in-out 0.2s;
+}
+
+select:hover {
+  opacity: 1;
+}
+
+option {
+  appearance: none;
+  font-size: 1rem;
+}
+
+button {
+  font-style: italic;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: inherit;
+
+  background-color: transparent;
+  border: 0;
+  opacity: 0.5;
+
+  transition: ease-in-out 0.2s;
+}
+
+button:hover {
+  opacity: 1;
+}
