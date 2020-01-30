@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import PromptSide from '../PromptSide/PromptSide';
 import AnswerSide from '../AnswerSide/AnswerSide';
-import './Flashcard.css'
-
 
 const flashcardStyles = {
   margin: '20px', 
   width: '760px', 
-  height: '500px',
+  height: '490px',
   display: 'flex'
 }
 
 function Flashcard({ card, onAnswered }) {
   const [isReversed, setReversed] = useState(false)
 
-  const handleLowerSideClicked = () => {
+  const handleAnswerSideClicked = () => {
     isReversed && onAnswered()
     
     setReversed(!isReversed)
@@ -23,7 +21,7 @@ function Flashcard({ card, onAnswered }) {
   return (
     <div style={flashcardStyles}>
       <PromptSide prompt={card[0]} isReversed={isReversed} />
-      <AnswerSide answer={card[1]} isReversed={isReversed} onClick={handleLowerSideClicked} />
+      <AnswerSide answer={card[1]} isReversed={isReversed} onClick={handleAnswerSideClicked} />
     </div>
   )
 }

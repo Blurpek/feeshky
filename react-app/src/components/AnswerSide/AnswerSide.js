@@ -8,13 +8,12 @@ const answerSideStyles = (theme, isReversed) => ({
   height: '100%',
   width: '49%',
   color: theme?.textColor.main,
-  backgroundColor: isReversed ? theme?.backgroundColor.main : theme?.backgroundColor.dark,
-  border: '14px solid ' + theme?.secondaryColor,
+  backgroundColor: isReversed ? theme.backgroundColor.main : theme.backgroundColor.dark,
+  border: '14px solid ' + theme.secondaryColor,
   borderRadius: '15px 15px 15px 15px',
   borderLeftWidth: isReversed ? '14px' : 0,
   cursor: 'pointer',
-  boxShadow: !isReversed ? '0 0' : '0 0 10px 10px grey',
-  // boxShadow: !isReversed ? '0 0' : '-10px 10px 10px grey',
+  boxShadow: !isReversed ? '0 0' : '0 0 10px 10px ' + theme.shadow,
   transition: 'ease-out .2s',
   zIndex: isReversed ? 1 : 0
 })
