@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "feeshky",
-  "version": "1.0",
+  "version": "1.1",
 
   "description": "Flashcards containing english to english idioms explanation.",
 
@@ -9,9 +9,21 @@
     "48": "icons/48.png"
   },
 
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": ["storage"],
+
   "browser_action": {
     "default_icon": "icons/48.png",
     "default_title": "Feeshky",
     "default_popup": "popup/index.html"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "feeshky_id@addon.com"
+    }
   }
 }
