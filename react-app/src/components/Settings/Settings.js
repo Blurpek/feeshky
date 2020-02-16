@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './Settings.css'
-import { ReactComponent as Icon } from '../../assets/icons/settings-solid.svg'
-
-const styles = {
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-around',
-  height: '40px',
-  width: '100%'
-}
+import { ReactComponent as OptionsIcon } from '../../assets/icons/settings-solid.svg'
 
 function Settings({ decks, currentDeck, onDeckChange, onReverse, themes, currentTheme, onThemeChange }) {
   const handleDeckChange = event => {
@@ -21,7 +13,7 @@ function Settings({ decks, currentDeck, onDeckChange, onReverse, themes, current
   }
 
   return (
-    <div style={styles}>
+    <div className="settings-container">
       <select id="decks" className="list" value={currentDeck.name} onChange={handleDeckChange}>
         { decks.map(deck => (
           <option key={deck.name}>{ deck.name }</option>
@@ -33,15 +25,13 @@ function Settings({ decks, currentDeck, onDeckChange, onReverse, themes, current
           <option key={theme.name}>{ theme.name }</option>
         ))}
       </select>
-      <div className="options-icon">
-        <Icon 
-          className="icon" 
-          width="28px" 
-          height="28px" 
-          fill={currentTheme.textColor.main} 
-          onClick={ () => browser.runtime.openOptionsPage() } 
-        />
-      </div>
+      <OptionsIcon 
+        className="icon" 
+        width="28px" 
+        height="28px" 
+        fill={currentTheme.textColor.main} 
+        onClick={ () => browser.runtime.openOptionsPage() } 
+      />
     </div>
   )
 }
