@@ -15,7 +15,12 @@ function CardSideContent({ content }) {
         <img className="content-image" src={'data:image/png;base64,' + content.image} />
       </div>
       ) : (
-        <h1 className="row" style={{ marginTop: content?.text?.length < 100 ? '30%' : 0 }}>{ content?.text }</h1>
+        <h1 className="row" 
+          style={{ 
+            marginTop: content?.text?.length < 300 ? '30%' : 0, 
+            fontSize: content?.text?.length < 150 ? '2rem' : '1.4rem' 
+          }}
+          >{ content?.text }</h1>
       )}
       { content.audio && 
         <MusciNoteIcon

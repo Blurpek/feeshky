@@ -8,7 +8,7 @@ const useAudio = source => {
     audio.pause()
     if (source) {
       audio.src = 'data:audio/mpeg;base64,' + source
-      audio.volume = 0.4
+      audio.volume = 0.6
       audio.play()
       setAudio(audio)
       setPlaying(true)
