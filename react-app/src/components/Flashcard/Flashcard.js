@@ -4,8 +4,8 @@ import AnswerSide from '../AnswerSide/AnswerSide';
 
 const flashcardStyles = {
   margin: '20px', 
-  width: '760px', 
-  height: '490px',
+  width: '745px', 
+  height: '480px',
   display: 'flex'
 }
 

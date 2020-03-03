@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import './Settings.css'
 import { ReactComponent as OptionsIcon } from '../../assets/icons/settings-solid.svg'
 
+var browser = require("webextension-polyfill");
+
 function Settings({ decks, currentDeck, onDeckChange, onReverse, themes, currentTheme, onThemeChange }) {
   const handleDeckChange = event => {
     onDeckChange(decks.find(deck => deck.name === event.target.value))

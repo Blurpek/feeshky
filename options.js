@@ -1,10 +1,15 @@
-var defaultDecks = [JSON.parse(deck)]
+var defaultDecks = []
+var defaultDeck = JSON.parse(deck)
+
+if (defaultDeck) {
+  defaultDecks.push(defaultDeck)
+}
 
 var decks = []
 var userSet = []
 
 function saveOptions() {
-  browser.storage.sync.set({
+  browser.storage.local.set({
     decks: JSON.stringify(decks),
     userSet: JSON.stringify(userSet)
   });
@@ -47,7 +52,7 @@ async function restoreOptions() {
 }
 
 function loadDecks(htmlList, nameOfSetInStorage, decks) {
-  return browser.storage.sync.get(nameOfSetInStorage).then(result => {
+  return browser.storage.local.get(nameOfSetInStorage).then(result => {
     if (result[nameOfSetInStorage]) {
       JSON.parse(result[nameOfSetInStorage]).forEach(deck => {
         decks.push(deck)
@@ -68,7 +73,6 @@ document.getElementById('import').onclick = function() {
   if (files.length <= 0) {
     return false;
   }
-
   var fr = new FileReader();
 
   fr.onload = function(e) { 

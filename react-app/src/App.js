@@ -5,6 +5,8 @@ import Settings from './components/Settings/Settings';
 import { useEffect } from 'react';
 import * as idiomsDeck from './assets/decks/idiomsDeck.json'
 
+var browser = require("webextension-polyfill");
+
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -20,19 +22,21 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState(themes.orangeTeal)
   
   useEffect(() => {
-    browser.storage.sync.get().then(result => { 
-    const userSet = JSON.parse(result.userSet)
-      if (userSet?.length > 0) {
-        setDecks(userSet)
-        result.currentDeck && setCurrentDeck(result.currentDeck)
-        result.currentCardIndex && setCurrentCardIndex(result.currentCardIndex)
-      }
+    browser.storage.local.get().then(result => { 
+    if (result.userSet) {
+      const userSet = JSON.parse(result.userSet)
+        if (userSet?.length > 0) {
+          setDecks(userSet)
+          result.currentDeck && setCurrentDeck(result.currentDeck)
+          result.currentCardIndex && setCurrentCardIndex(result.currentCardIndex)
+        }
+    }
       result.currentTheme && handleThemeChange(result.currentTheme)
     })
   }, [])
 
   useEffect(() => {
-    browser.storage.sync.set({ currentDeck: currentDeck, currentCardIndex: currentCardIndex, currentTheme: currentTheme })
+    browser.storage.local.set({ currentDeck: currentDeck, currentCardIndex: currentCardIndex, currentTheme: currentTheme })
   }, [currentDeck, currentCardIndex, currentTheme])
 
   const handleAnswered = () => {
