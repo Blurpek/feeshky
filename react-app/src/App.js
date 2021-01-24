@@ -3,7 +3,7 @@ import Flashcard from './components/Flashcard/Flashcard';
 import { ThemeContext, themes } from './ThemeContext';
 import Settings from './components/Settings/Settings';
 import { useEffect } from 'react';
-import * as idiomsDeck from './../../decks/idiomsDeck.json'
+import * as idiomsDeck from './assets/idiomsDeck.json'
 
 var browser = require("webextension-polyfill");
 
