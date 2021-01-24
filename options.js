@@ -16,6 +16,10 @@ function saveOptions() {
 }
 
 var handleDeckClick = function(e) {
+  e.preventDefault()
+  if (e.target.id != e.currentTarget.id)
+    return
+
   var deckLi = document.getElementById(e.target.id)
   var deck = decks.find(deck => deck.name === e.target.id)
   
@@ -34,6 +38,17 @@ var handleDeckClick = function(e) {
   saveOptions()
 }
 
+const handleRemoveDeck = function(e) {
+  e.preventDefault()
+  
+  decks = decks.filter(d => d.name !== e.target.parentNode.id)
+  userSet = userSet.filter(d => d.name !== e.target.parentNode.id)
+
+  document.getElementById(e.target.parentNode.id).remove()
+
+  saveOptions()
+}
+
 async function restoreOptions() {
   var allDeckslist = document.getElementById('all-decks')
   var userSetlist = document.getElementById('chosen-decks')
@@ -43,11 +58,7 @@ async function restoreOptions() {
 
   defaultDecks.filter(deck => !(decks.some(d => d.name === deck.name) || userSet.some(d => d.name === deck.name))).forEach(deck => {
     decks.push(deck)
-    var deckElement = document.createElement('li')
-    deckElement.id = deck.name
-    deckElement.onclick = handleDeckClick
-    deckElement.appendChild(document.createTextNode(deck.name))
-    allDeckslist.appendChild(deckElement)
+    allDeckslist.appendChild(createDeckElement(deck.name))
   })
 }
 
@@ -56,15 +67,26 @@ function loadDecks(htmlList, nameOfSetInStorage, decks) {
     if (result[nameOfSetInStorage]) {
       JSON.parse(result[nameOfSetInStorage]).forEach(deck => {
         decks.push(deck)
-        var deckElement = document.createElement('li')
-        deckElement.id = deck.name
-        deckElement.onclick = handleDeckClick
-        deckElement.appendChild(document.createTextNode(deck.name))
-        htmlList.appendChild(deckElement)
+
+        htmlList.appendChild(createDeckElement(deck.name))
       })
     }
     return result
   })
+}
+
+function createDeckElement(name) {
+  const deckElement = document.createElement('li')
+  deckElement.id = name
+  deckElement.addEventListener('click', handleDeckClick)
+  deckElement.appendChild(document.createTextNode(name))
+  
+  const removeIcon = document.createElement('span')
+  removeIcon.innerText = '✘'
+  removeIcon.addEventListener('click', handleRemoveDeck)
+  deckElement.appendChild(removeIcon)
+
+  return deckElement
 }
 
 document.getElementById('import').onclick = function() {
@@ -80,11 +102,7 @@ document.getElementById('import').onclick = function() {
     // var formatted = JSON.stringify(result, null, 2);
     if (!decks.some(d => d.name === result.name)) {
       decks.push(result)
-      var deckElement = document.createElement('li')
-      deckElement.id = result.name
-      deckElement.onclick = handleDeckClick
-      deckElement.appendChild(document.createTextNode(result.name))
-      document.getElementById('all-decks').appendChild(deckElement)
+      document.getElementById('all-decks').appendChild(createDeckElement(result.name))
       saveOptions()
     } else {
       alert('There is already that deck')
