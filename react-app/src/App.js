@@ -3,7 +3,7 @@ import Flashcard from './components/Flashcard/Flashcard';
 import { ThemeContext, themes } from './ThemeContext';
 import Settings from './components/Settings/Settings';
 import { useEffect } from 'react';
-import * as idiomsDeck from './assets/decks/idiomsDeck.json'
+import * as idiomsDeck from './../../decks/idiomsDeck.json'
 
 var browser = require("webextension-polyfill");
 
@@ -14,6 +14,8 @@ function shuffle(a) {
   }
   return a;
 }
+
+const isDeckInSet = (deck, set) => deck && set.some(d => d.name === deck.name)
 
 function App() {
   const [decks, setDecks] = useState([idiomsDeck.default])
@@ -27,8 +29,8 @@ function App() {
       const userSet = JSON.parse(result.userSet)
         if (userSet?.length > 0) {
           setDecks(userSet)
-          result.currentDeck && setCurrentDeck(result.currentDeck)
-          result.currentCardIndex && setCurrentCardIndex(result.currentCardIndex)
+          setCurrentCardIndex(result.currentCardIndex || 0)
+          setCurrentDeck(isDeckInSet(result.currentDeck, userSet) ? result.currentDeck : userSet[0])
         }
     }
       result.currentTheme && handleThemeChange(result.currentTheme)
